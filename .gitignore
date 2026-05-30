@@ -1,0 +1,6 @@
+*.log
+backups/
+*.key
+*.pem
+.env
+tests/output/
