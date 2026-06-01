@@ -16,5 +16,3 @@ Just a quick collection of Bash scripts I put together to automate everyday sysa
 
 Before running anything, remember to make the script executable:
 `chmod +x script_name.sh`
-
-For specific flags, options, and usage examples, just check the comments at the top of each individual script.
