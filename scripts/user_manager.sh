@@ -116,7 +116,7 @@ create_user() {
 list_users() {
     info "Human user accounts (UID >=1000)
     echo""
-    printf " "USERNAME" "UID" "GROUP" "HOME"
+    printf "%-20s %-8s %-20s %-30s\n" "USERNAME" "UID" "GROUP" "HOME"
     printf "%-20s %-8s %-20s %-30s\n" "--------" "---" "-----" "----"
 
     while IFS=: read -r username _ uid gid - home shell; do
