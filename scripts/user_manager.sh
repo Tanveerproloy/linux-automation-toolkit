@@ -26,21 +26,26 @@ NC='\033[0;0m'
 LOG_FILE="/var/log/user_manager.log"
 TIMESTAMP=$(date '+%Y-%m-%d %H:%M:S)
 
+
 #helper functions
+
 log() { echo "$TIMESTAMP [$1] $2" | sudo tee -a "$LOG_FILE";}
 success() { echo -e "{$GREEN}[OK]${NC} $1"; log "OK" "$1";}
 error() { echo -e "${RED}[ERROR]${NC} $1" >&2; log "ERROR" "$1"; exit 1;}
 info() { echo -e"${BLUE}[INFO]${NC} $1";log "INFO" "$1";}
 warn() {echo -e"{YELLOW}[WARN]${NC} $1"; log "WARN" "$1";}
 
-# --- ensure script runs as root ---
+
+# ensure script runs as root
+
 check_root() {
     if [[ "$EUID" -ne 0 ]]; then
         error "This script must be run as root. Use: sudo $0"
     fi
 }
 
-# --- usage instructions ---
+
+# usage instructions
 usage() {
     echo ""
     echo "Usage: sudo $0 <action> [options]"
@@ -106,4 +111,21 @@ create_user() {
     echo ""
 
     log "OK" "User '$username' created, added to group '$group'"
+}
+
+list_users() {
+    info "Human user accounts (UID >=1000)
+    echo""
+    printf " "USERNAME" "UID" "GROUP" "HOME"
+    printf "%-20s %-8s %-20s %-30s\n" "--------" "---" "-----" "----"
+
+    while IFS=: read -r username _ uid gid - home shell; do
+                if [[ "$uid" -ge 1000 && "$uid" -ne 65534 && "$shell" != "/usr/sbin/nologin" && "$shell" != "/bin/false" ]]; then
+            local group_name
+            group_name=$(getent group "$gid" | cut -d: -f1)
+            printf "%-20s %-8s %-20s %-30s\n" "$username" "$uid" "$group_name" "$home"
+        fi
+    done < /etc/passwd
+    echo ""
+
 }
