@@ -12,7 +12,7 @@
 # list - shows all non system accounts (UID >= 1000)
 #=====================================================================================
 
-set -eou pipefall
+set -eou pipefail
 
 #visual output helpers
 
@@ -24,16 +24,16 @@ NC='\033[0;0m'
 
 #logging
 LOG_FILE="/var/log/user_manager.log"
-TIMESTAMP=$(date '+%Y-%m-%d %H:%M:S)
+TIMESTAMP=$(date '+%Y-%m-%d %H-%M-S')
 
 
 #helper functions
 
 log() { echo "$TIMESTAMP [$1] $2" | sudo tee -a "$LOG_FILE";}
-success() { echo -e "{$GREEN}[OK]${NC} $1"; log "OK" "$1";}
+success() { echo -e "${GREEN}[OK]${NC} $1"; log "OK" "$1";}
 error() { echo -e "${RED}[ERROR]${NC} $1" >&2; log "ERROR" "$1"; exit 1;}
-info() { echo -e"${BLUE}[INFO]${NC} $1";log "INFO" "$1";}
-warn() {echo -e"{YELLOW}[WARN]${NC} $1"; log "WARN" "$1";}
+info() { echo -e "${BLUE}[INFO]${NC} $1";log "INFO" "$1";}
+warn() { echo -e "${YELLOW}[WARN]${NC} $1"; log "WARN" "$1";}
 
 
 # ensure script runs as root
@@ -113,19 +113,95 @@ create_user() {
     log "OK" "User '$username' created, added to group '$group'"
 }
 
+delete_user() {
+    local username="$1"
+
+    # --- verify user exists before trying to delete ---
+    if ! id "$username" &>/dev/null; then
+        error "User '$username' does not exist."
+    fi
+
+    # --- safety check: dont delete system accounts or root ---
+    local uid
+    uid=$(id -u "$username")
+    if [[ "$uid" -lt 1000 ]]; then
+        error "Refusing to delete system account '$username' (UID $uid < 1000)."
+    fi
+
+    warn "About to delete user '$username' and their home directory."
+    read -r -p "Are you sure? (yes/no): " confirmation
+
+    if [[ "$confirmation" != "yes" ]]; then
+        info "Deletion cancelled."
+        exit 0
+    fi
+
+    info "Deleting user '$username'..."
+
+    # --- kill any running processes owned by this user ---
+    pkill -u "$username" 2>/dev/null || true
+
+    # --- delete user and home directory ---
+    userdel --remove "$username"
+
+    # --- verify deletion ---
+    if id "$username" &>/dev/null; then
+        error "Deletion failed — user '$username' still exists."
+    fi
+
+    success "User '$username' and home directory deleted."
+}
+
 list_users() {
-    info "Human user accounts (UID >=1000)
-    echo""
+    info "Human user accounts (UID >= 1000):"
+    echo ""
     printf "%-20s %-8s %-20s %-30s\n" "USERNAME" "UID" "GROUP" "HOME"
     printf "%-20s %-8s %-20s %-30s\n" "--------" "---" "-----" "----"
 
-    while IFS=: read -r username _ uid gid - home shell; do
-                if [[ "$uid" -ge 1000 && "$uid" -ne 65534 && "$shell" != "/usr/sbin/nologin" && "$shell" != "/bin/false" ]]; then
+    while IFS=: read -r username _ uid gid _ home shell; do
+        if [[ "$uid" -ge 1000 && "$uid" -ne 65534 && "$shell" != "/usr/sbin/nologin" && "$shell" != "/bin/false" ]]; then
             local group_name
             group_name=$(getent group "$gid" | cut -d: -f1)
             printf "%-20s %-8s %-20s %-30s\n" "$username" "$uid" "$group_name" "$home"
         fi
     done < /etc/passwd
     echo ""
-
 }
+
+
+# MAIN Function
+
+main() {
+    check_root
+
+    # --- require at least one argument ---
+    if [[ $# -eq 0 ]]; then
+        usage
+    fi
+
+    local action="$1"
+    shift   # remove $1 from argument list, so $2 becomes $1, etc.
+
+    case "$action" in
+        create)
+            [[ $# -lt 1 ]] && error "Usage: $0 create <username> [group]"
+            create_user "$@"
+            ;;
+        delete)
+            [[ $# -ne 1 ]] && error "Usage: $0 delete <username>"
+            delete_user "$1"
+            ;;
+        list)
+            list_users
+            ;;
+        --help|-h)
+            usage
+            ;;
+        *)
+            error "Unknown action '$action'. Use create, delete, or list."
+            ;;
+    esac
+}
+
+# --- run main, passing all script arguments ---
+main "$@"
