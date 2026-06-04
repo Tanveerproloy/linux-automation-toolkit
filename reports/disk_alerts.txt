@@ -1,0 +1,154 @@
+==================================================
+ALERT [WARN] — 2026-06-05 04:04:25
+Host: GARBAGE
+Subject: Disk Warning: /mnt/wsl at 1%
+
+Filesystem:  none
+Mount point: /mnt/wsl
+Usage:       1%
+Threshold:   1%
+Time:        2026-06-05 04:04:25
+Host:        GARBAGE
+
+Please investigate and free up space.
+
+==================================================
+ALERT [WARN] — 2026-06-05 04:04:25
+Host: GARBAGE
+Subject: Disk Warning: /usr/lib/wsl/drivers at 70%
+
+Filesystem:  drivers
+Mount point: /usr/lib/wsl/drivers
+Usage:       70%
+Threshold:   1%
+Time:        2026-06-05 04:04:25
+Host:        GARBAGE
+
+Please investigate and free up space.
+
+==================================================
+ALERT [WARN] — 2026-06-05 04:04:25
+Host: GARBAGE
+Subject: Disk Warning: / at 2%
+
+Filesystem:  /dev/sdd
+Mount point: /
+Usage:       2%
+Threshold:   1%
+Time:        2026-06-05 04:04:25
+Host:        GARBAGE
+
+Please investigate and free up space.
+
+==================================================
+ALERT [WARN] — 2026-06-05 04:04:25
+Host: GARBAGE
+Subject: Disk Warning: /mnt/wslg at 1%
+
+Filesystem:  none
+Mount point: /mnt/wslg
+Usage:       1%
+Threshold:   1%
+Time:        2026-06-05 04:04:25
+Host:        GARBAGE
+
+Please investigate and free up space.
+
+==================================================
+ALERT [WARN] — 2026-06-05 04:04:25
+Host: GARBAGE
+Subject: Disk Warning: /init at 1%
+
+Filesystem:  rootfs
+Mount point: /init
+Usage:       1%
+Threshold:   1%
+Time:        2026-06-05 04:04:25
+Host:        GARBAGE
+
+Please investigate and free up space.
+
+==================================================
+ALERT [WARN] — 2026-06-05 04:04:25
+Host: GARBAGE
+Subject: Disk Warning: /run at 1%
+
+Filesystem:  none
+Mount point: /run
+Usage:       1%
+Threshold:   1%
+Time:        2026-06-05 04:04:25
+Host:        GARBAGE
+
+Please investigate and free up space.
+
+==================================================
+ALERT [WARN] — 2026-06-05 04:04:25
+Host: GARBAGE
+Subject: Disk Warning: /mnt/wslg/versions.txt at 1%
+
+Filesystem:  none
+Mount point: /mnt/wslg/versions.txt
+Usage:       1%
+Threshold:   1%
+Time:        2026-06-05 04:04:25
+Host:        GARBAGE
+
+Please investigate and free up space.
+
+==================================================
+ALERT [WARN] — 2026-06-05 04:04:25
+Host: GARBAGE
+Subject: Disk Warning: /mnt/wslg/doc at 1%
+
+Filesystem:  none
+Mount point: /mnt/wslg/doc
+Usage:       1%
+Threshold:   1%
+Time:        2026-06-05 04:04:25
+Host:        GARBAGE
+
+Please investigate and free up space.
+
+==================================================
+ALERT [WARN] — 2026-06-05 04:04:25
+Host: GARBAGE
+Subject: Disk Warning: /mnt/c at 70%
+
+Filesystem:  C:\
+Mount point: /mnt/c
+Usage:       70%
+Threshold:   1%
+Time:        2026-06-05 04:04:25
+Host:        GARBAGE
+
+Please investigate and free up space.
+
+==================================================
+ALERT [WARN] — 2026-06-05 04:04:25
+Host: GARBAGE
+Subject: Disk Warning: /mnt/d at 68%
+
+Filesystem:  D:\
+Mount point: /mnt/d
+Usage:       68%
+Threshold:   1%
+Time:        2026-06-05 04:04:25
+Host:        GARBAGE
+
+Please investigate and free up space.
+
+==================================================
+ALERT [WARN] — 2026-06-05 04:04:25
+Host: GARBAGE
+Subject: Disk Warning: /mnt/e at 43%
+
+Filesystem:  E:\
+Mount point: /mnt/e
+Usage:       43%
+Threshold:   1%
+Time:        2026-06-05 04:04:25
+Host:        GARBAGE
+
+Please investigate and free up space.
+
