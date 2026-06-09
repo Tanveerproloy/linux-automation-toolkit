@@ -1,0 +1,53 @@
+=================================================================
+  SSH THREAT INTELLIGENCE REPORT
+  Generated: 2026-06-07 16:35:28
+  Host:      GARBAGE
+  Log file:  /var/log/auth.log
+=================================================================
+
+SUMMARY
+-------
+  Total failed attempts:              7
+  Total invalid usernames:            3
+  Total unique attacker IPs:          3
+  Successful logins:                  2
+
+TOP ATTACKING IPs (by attempt count)
+--------------------------------------
+  Attempts   IP Address
+  --------   ----------
+  4          1.179.147.60
+  2          91.205.189.45
+  2          218.92.0.190
+
+MOST TARGETED USERNAMES
+------------------------
+  Count    Username
+  -----    --------
+  3        root
+  2        pi
+  2        from
+  2        ;
+  1        ubuntu
+
+SUCCESSFUL LOGINS (verify these are legitimate)
+------------------------------------------------
+  2026-06-07T16:35:13.111795+06:00 GARBAGE sudo:  ;          ;
+  Jun 01 02:12:07  ubuntu     192.168.1.5
+
+DETAILED ATTACK LOG (last 20 attempts)
+----------------------------------------
+  2026-06-07T16:35:13.111795+06:00 GARBAGE sudo:  FAIL   ;               ;
+  2026-06-07T16:35:13.111795+06:00 GARBAGE sudo:  FAIL   ;               ;
+  Jun 01 02:11:01  FAIL   root            218.92.0.190
+  Jun 01 02:11:04  FAIL   from            port
+  Jun 01 02:11:07  FAIL   root            1.179.147.60
+  Jun 01 02:11:09  FAIL   from            port
+  Jun 01 02:11:12  FAIL   root            1.179.147.60
+  Jun 01 02:12:01  FAIL   ubuntu          218.92.0.190
+  Jun 01 02:12:03  FAIL   pi              91.205.189.45
+  Jun 01 02:12:05  FAIL   pi              91.205.189.45
+
+=================================================================
+  Report saved: /home/tanveer_proloy/linux-automation-toolkit/reports/ssh_report_2026-06-07_16-35-28.txt
+=================================================================

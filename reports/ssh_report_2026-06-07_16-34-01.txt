@@ -1,0 +1,40 @@
+=================================================================
+  SSH THREAT INTELLIGENCE REPORT
+  Generated: 2026-06-07 16:34:01
+  Host:      GARBAGE
+  Log file:  /var/log/auth.log
+=================================================================
+
+SUMMARY
+-------
+  Total failed attempts:              0
+0
+  Total invalid usernames:            0
+0
+  Total unique attacker IPs:          0
+0
+  Successful logins:                  0
+0
+
+TOP ATTACKING IPs (by attempt count)
+--------------------------------------
+  Attempts   IP Address
+  --------   ----------
+
+MOST TARGETED USERNAMES
+------------------------
+  Count    Username
+  -----    --------
+
+SUCCESSFUL LOGINS (verify these are legitimate)
+------------------------------------------------
+  None recorded in this period.
+
+DETAILED ATTACK LOG (last 20 attempts)
+----------------------------------------
+      FAIL                   
+      FAIL                   
+
+=================================================================
+  Report saved: /home/tanveer_proloy/linux-automation-toolkit/reports/ssh_report_2026-06-07_16-34-01.txt
+=================================================================
